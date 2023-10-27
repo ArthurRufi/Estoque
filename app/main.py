@@ -14,4 +14,4 @@ total = ['142,99', '99,21', '78,45']
 e = Entradas('xxxx')
 e.entregarvenda(compra, total)'''
 e = Entradas('xxx')
-e.get_infos()
+e.get_infos(1234)

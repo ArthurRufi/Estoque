@@ -8,7 +8,7 @@ class Saidas:
 
     def consultar (self):
         f = DBDiario()
-        f.db_import()
+        f.db_export(f.db_conect(), 1234)
 
 
     def entregar(self):

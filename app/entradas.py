@@ -8,7 +8,6 @@ class Entradas:
 
     def entregarvenda(self, venda, total):
         p = DBDiario()
-        p.db_create()
         # dic = dict(zip(venda, total))
         dic = {}
         for x in range (len(venda)):
@@ -20,14 +19,15 @@ class Entradas:
         #aqui deve entregar as informações ao banco de dados para conectar inserir no DB
                 
 
-    def get_infos(self):
+    def get_infos(self, codigo):
         #retorna informações
         p = DBDiario()
-        if p.db_export(p.db_conect()) == False:
+        if p.db_export(p.db_conect(), codigo) == False:
             print('tabaco')
 
 
     def set_infos():
+        #altera informaçoes ou adiciona
         pass
 
 
