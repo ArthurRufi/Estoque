@@ -1,6 +1,5 @@
 import psycopg2
-from ocultados.dbinfos import dbnames,users,passwords,hosts,ports
-
+from dbinfos import cod
 class DBDiario:
     def __init__(self):
         pass
@@ -13,11 +12,11 @@ class DBDiario:
 
     def db_conect(self):
         # Parâmetros de conexão
-        dbname = dbnames
-        user = users
-        password = passwords
-        host = hosts  # ou o host do seu banco de dados
-        port = ports       # ou a porta do seu banco de dados
+        dbname = cod(1)
+        user = cod(2)
+        password = cod(3)
+        host = cod(4)  # ou o host do seu banco de dados
+        port = cod(5)       # ou a porta do seu banco de dados
 
         # Conecte-se ao PostgreSQL
         try:
@@ -27,11 +26,14 @@ class DBDiario:
             return False
 
 
-    def db_import(self, venda):
+    def db_import(self, conn, codigo, valor, vendedor):
         #aqui vai importar informações ao db
-        for chave, valor in venda.items():
-            print (f'{chave} adicionado ao DB com valor {valor}')
-            #adicionar interação com DB
+        cur = conn.cursor()
+        cur.execute(f"INSERT INTO entradas (codigo, preço, vendedor) VALUES({codigo}, {valor}, {vendedor});")
+        conn.commit()
+        # Feche o cursor e a conexão quando terminar
+        cur.close()
+        conn.close()
 
 
     def db_export(self, conn, codselect):
@@ -39,11 +41,11 @@ class DBDiario:
         #aqui vai exportar as informações do db
         cur = conn.cursor()
         if conn == False:
-            print('fuder')
+            print('fudeu')
         elif codselect == 1234 and conn != False:
             print('cod 1234 ok!')
             cur = conn.cursor()
-            cur.execute("SELECT * FROM entradas WHERE vendedor = 2134;")
+            cur.execute("SELECT * FROM entradas;")
             rows = cur.fetchall()
             a = []
             # Imprima os resultados
@@ -67,6 +69,13 @@ class DBDiario:
             cur.close()
             conn.close()
 
+
+    def db_delete(self, conn, codselect):
+        
+        if codselect == 1 and conn != False:
+            pass
+        elif codselect == 2 and conn !=False:
+            pass
 
 class DBnotas:
     def __init__(self) -> None:
