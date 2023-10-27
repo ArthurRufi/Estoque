@@ -11,7 +11,7 @@ class Entradas:
         vendedor = int(input('Insira o codigo do vendedor: '))
         valor = str(input('Insira o valor da venda: '))
         codven = int(input('Insira o codigo da venda:'))
-        p.db_import(p.db_conect(), vendedor, valor, codven)
+        p.db_import(p.db_conect(), codven, valor, vendedor, entradasaida=1)
         #aqui deve entregar as informações ao banco de dados para conectar inserir no DB
                 
 
@@ -28,5 +28,6 @@ class Entradas:
         print ('ok')
 
 
-    def conect_db():
-        pass
+    def delete_venda(self):
+        p = DBDiario()
+        p.db_delete(p.db_conect(), 1, 113)

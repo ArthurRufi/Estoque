@@ -1,5 +1,7 @@
 import psycopg2
 from dbinfos import cod
+import datetime
+
 class DBDiario:
     def __init__(self):
         pass
@@ -26,10 +28,17 @@ class DBDiario:
             return False
 
 
-    def db_import(self, conn, codigo, valor, vendedor):
+    def db_import(self, conn, *args, entradasaida):
         #aqui vai importar informações ao db
         cur = conn.cursor()
-        cur.execute(f"INSERT INTO entradas (codigo, preço, vendedor) VALUES({codigo}, {valor}, {vendedor});")
+        
+        if entradasaida == 1:
+            cur.execute(f"INSERT INTO entradas (codigo, preço, vendedor) VALUES({args[0]}, '{args[1]}', {int(args[2])});")
+        elif entradasaida == 2:
+            dataautal = datetime.datetime.now()
+            dataformatada = dataautal.strftime("%Y-%m-%d | %H:%M:%S")
+            cur.execute(f"INSERT INTO saidas (razao, valor, dataatual, idfuncionario) VALUES('{args[0]}', {args[1]}, '{dataformatada}', {int(args[2])});")
+            
         conn.commit()
         # Feche o cursor e a conexão quando terminar
         cur.close()
@@ -56,6 +65,20 @@ class DBDiario:
             cur.close()
             conn.close()
 
+        elif codselect == 2 and conn != False:
+            print('cod 2 ok!')
+            cur = conn.cursor()
+            cur.execute("SELECT * FROM saidas;")
+            rows = cur.fetchall()
+            a = []
+            # Imprima os resultados
+            for row in rows:
+                print(row)
+        
+            # Feche o cursor e a conexão quando terminar
+            cur.close()
+            conn.close()
+
         else:
             cur = conn.cursor()
             cur.execute("SELECT * FROM entradas WHERE vendedor = 2132;")
@@ -70,12 +93,20 @@ class DBDiario:
             conn.close()
 
 
-    def db_delete(self, conn, codselect):
-        
+    def db_delete(self, conn, codselect, delcod):
+        #organizar opções
         if codselect == 1 and conn != False:
-            pass
+            cur = conn.cursor()
+            cur.execute (f"DELETE FROM entradas WHERE codigo = '{delcod}';")
+            conn.commit()
+            cur.close()
+            conn.close()
+        
         elif codselect == 2 and conn !=False:
             pass
+        # adicionar tratamento de erros para conferir se o arquivo foi excluido
+
+
 
 class DBnotas:
     def __init__(self) -> None:
