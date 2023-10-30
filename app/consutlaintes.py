@@ -1,2 +1,11 @@
 class consultaItens:
-    pass
+    def __init__(self) -> None:
+        pass
+
+
+    def verItens():
+        pass
+
+
+    def pegarItem():
+        pass

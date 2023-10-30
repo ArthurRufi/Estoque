@@ -11,11 +11,8 @@ class Saidas:
         f.db_export(f.db_conect(), 2)
 
 
-    def adicionar_saida(self):
+    def adicionar_saida(self, codvendedor, valortotal, razaodasaida):
 
         p = DBDiario()
-        vendedor = int(input('Insira o codigo do funcionario: '))
-        valor = str(input('Insira o valor da saida: '))
-        codven = str(input('Insira a razao da venda:'))
-        p.db_import(p.db_conect(), codven, valor, vendedor, entradasaida=2)
+        p.db_import(p.db_conect(), razaodasaida, valortotal, codvendedor, entradasaida=2)
         #aqui deve entregar as informações ao banco de dados para conectar inserir no DB

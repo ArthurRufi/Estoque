@@ -6,12 +6,9 @@ class Entradas:
         self.entradas = entradas
 
 
-    def entregarvenda(self):
+    def entregarvenda(self, codvendedor, valorvenda, codigodavenda):
         p = DBDiario()
-        vendedor = int(input('Insira o codigo do vendedor: '))
-        valor = str(input('Insira o valor da venda: '))
-        codven = int(input('Insira o codigo da venda:'))
-        p.db_import(p.db_conect(), codven, valor, vendedor, entradasaida=1)
+        p.db_import(p.db_conect(), codvendedor, valorvenda, codigodavenda, entradasaida=1)
         #aqui deve entregar as informações ao banco de dados para conectar inserir no DB
                 
 
@@ -20,7 +17,8 @@ class Entradas:
         p = DBDiario()
         if p.db_export(p.db_conect(), codigo) == False:
             print('tabaco')
-
+            return False
+        
 
     def set_infos(self):
         p = DBDiario()

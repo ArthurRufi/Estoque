@@ -3,6 +3,10 @@ class Venda:
         pass
 
     
+    def iniciarVenda():
+        pass
+
+
     def registarvendacompleta():
         pass
 
