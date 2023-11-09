@@ -26,6 +26,6 @@ class Entradas:
         print ('ok')
 
 
-    def delete_venda(self):
+    def delete_venda(self, cod, codvenda):
         p = DBDiario()
-        p.db_delete(p.db_conect(), 1, 113)
+        p.db_delete(p.db_conect(), cod, codvenda)
