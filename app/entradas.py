@@ -10,12 +10,14 @@ class Entradas:
         p = DBDiario()
         p.db_import(p.db_conect(), codvendedor, valorvenda, codigodavenda, entradasaida=1)
         #aqui deve entregar as informações ao banco de dados para conectar inserir no DB
+        #!!!INSERIR TIPO DO PAGAMENTO
                 
 
     def get_infos(self, codigo):
         #retorna informações
         p = DBDiario()
         if p.db_export(p.db_conect(), codigo) == False:
+            #adicionar logs para registro de atividades
             print('tabaco')
             return False
         
@@ -27,5 +29,7 @@ class Entradas:
 
 
     def delete_venda(self, cod, codvenda):
+        #trocar para status de venda
+
         p = DBDiario()
         p.db_delete(p.db_conect(), cod, codvenda)

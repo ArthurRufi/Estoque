@@ -16,3 +16,7 @@ class Saidas:
         p = DBDiario()
         p.db_import(p.db_conect(), razaodasaida, valortotal, codvendedor, entradasaida=2)
         #aqui deve entregar as informações ao banco de dados para conectar inserir no DB
+
+
+    def somarSaidas(self, opction):
+        pass
